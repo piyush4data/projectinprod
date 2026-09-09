@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-commerce Sales &amp; Inventory Analytics Suite</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+  :root{
+    --bg:#0f1420; --panel:#161d2e; --panel2:#1c2438; --text:#e7ebf3; --muted:#8b93a7;
+    --accent:#5b8cff; --accent2:#33d6b0; --warn:#ff9f5b; --danger:#ff6b81; --border:#2a3350;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);}
+  header{padding:28px 32px 16px;border-bottom:1px solid var(--border);}
+  header h1{margin:0 0 4px;font-size:22px;font-weight:700;}
+  header p{margin:0;color:var(--muted);font-size:13px;}
+  .container{max-width:1300px;margin:0 auto;padding:24px 32px 60px;}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px;}
+  .kpi{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:18px 20px;}
+  .kpi .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;}
+  .kpi .value{font-size:26px;font-weight:700;}
+  .kpi .value.green{color:var(--accent2);}
+  .kpi .value.orange{color:var(--warn);}
+  .grid{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:20px;}
+  .grid.two{grid-template-columns:1fr 1fr;}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:20px;}
+  .card h2{margin:0 0 14px;font-size:14px;font-weight:600;color:var(--text);}
+  .card h2 span{color:var(--muted);font-weight:400;font-size:12px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--border);}
+  th{color:var(--muted);font-weight:600;font-size:11px;text-transform:uppercase;}
+  tr:last-child td{border-bottom:none;}
+  .tag{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;background:var(--panel2);color:var(--muted);}
+  .filters{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+  select{background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 12px;font-size:13px;}
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:30px 0 10px;}
+  canvas{max-height:280px;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📊 E-commerce Sales &amp; Inventory Analytics Suite</h1>
+  <p>End-to-end pipeline: CSV → Python/Pandas ETL → SQLite → Dashboard &nbsp;|&nbsp; Data window: Jan 2024 – Dec 2025</p>
+</header>
+
+<div class="container">
+
+  <div class="kpis" id="kpiRow"></div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Monthly Revenue &amp; Profit Trend <span>last 24 months</span></h2>
+      <canvas id="trendChart"></canvas>
+    </div>
+    <div class="card">
+      <h2>Revenue by Category</h2>
+      <canvas id="categoryPie"></canvas>
+    </div>
+  </div>
+
+  <div class="grid two">
+    <div class="card">
+      <h2>Sales Channel Performance</h2>
+      <canvas id="channelChart"></canvas>
+    </div>
+    <div class="card">
+      <h2>Regional Revenue &amp; Profit</h2>
+      <canvas id="regionChart"></canvas>
+    </div>
+  </div>
+
+  <div class="grid two">
+    <div class="card">
+      <h2>Top 10 Products by Revenue</h2>
+      <table>
+        <thead><tr><th>Product</th><th>Category</th><th>Units</th><th>Revenue</th></tr></thead>
+        <tbody id="topProductsBody"></tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h2>Return Rate by Category</h2>
+      <canvas id="returnChart"></canvas>
+    </div>
+  </div>
+
+</div>
+
+<footer>Built with Python (Pandas ETL) · SQLite · Chart.js — synthetic dataset for demonstration purposes</footer>
+
+<script>
+const DATA = {"kpis": {"total_revenue": 522856.51, "total_profit": 235510.81, "total_orders": 6000.0, "total_customers": 1729.0, "return_rate_pct": 5.73, "avg_order_value": 87.14}, "monthly": [{"month": "2024-01", "revenue": 19162.25, "profit": 8466.52, "orders": 244}, {"month": "2024-02", "revenue": 18537.03, "profit": 8291.72, "orders": 233}, {"month": "2024-03", "revenue": 25001.44, "profit": 11314.39, "orders": 260}, {"month": "2024-04", "revenue": 23985.42, "profit": 10813.62, "orders": 269}, {"month": "2024-05", "revenue": 24533.52, "profit": 11025.05, "orders": 257}, {"month": "2024-06", "revenue": 18806.45, "profit": 8437.98, "orders": 214}, {"month": "2024-07", "revenue": 20439.02, "profit": 9178.11, "orders": 242}, {"month": "2024-08", "revenue": 21538.43, "profit": 9740.83, "orders": 246}, {"month": "2024-09", "revenue": 18073.74, "profit": 8180.83, "orders": 208}, {"month": "2024-10", "revenue": 22260.51, "profit": 10167.04, "orders": 256}, {"month": "2024-11", "revenue": 23498.24, "profit": 10622.61, "orders": 271}, {"month": "2024-12", "revenue": 23712.06, "profit": 11021.73, "orders": 258}, {"month": "2025-01", "revenue": 22824.72, "profit": 10150.55, "orders": 259}, {"month": "2025-02", "revenue": 21689.23, "profit": 9642.11, "orders": 248}, {"month": "2025-03", "revenue": 22378.04, "profit": 10062.85, "orders": 258}, {"month": "2025-04", "revenue": 19958.45, "profit": 8945.27, "orders": 231}, {"month": "2025-05", "revenue": 21823.42, "profit": 9820.15, "orders": 261}, {"month": "2025-06", "revenue": 21133.52, "profit": 9538.39, "orders": 227}, {"month": "2025-07", "revenue": 22707.36, "profit": 10270.68, "orders": 264}, {"month": "2025-08", "revenue": 21913.78, "profit": 9889.96, "orders": 263}, {"month": "2025-09", "revenue": 18128.87, "profit": 8179.96, "orders": 226}, {"month": "2025-10", "revenue": 22259.58, "profit": 9832.76, "orders": 271}, {"month": "2025-11", "revenue": 25721.34, "profit": 11676.8, "orders": 271}, {"month": "2025-12", "revenue": 22770.09, "profit": 10240.9, "orders": 263}], "by_category": [{"category": "Beauty", "revenue": 133976.99, "profit": 61200.37, "units_sold": 1635}, {"category": "Electronics", "revenue": 114861.87, "profit": 59071.75, "units_sold": 1652}, {"category": "Apparel", "revenue": 109798.69, "profit": 45413.55, "units_sold": 1719}, {"category": "Home & Kitchen", "revenue": 91328.39, "profit": 36856.62, "units_sold": 1708}, {"category": "Sports", "revenue": 72890.57, "profit": 32968.52, "units_sold": 1675}], "top_products": [{"product_name": "Moisturizer", "category": "Beauty", "revenue": 50980.33, "units_sold": 299}, {"product_name": "Smart Watch", "category": "Electronics", "revenue": 41956.13, "units_sold": 351}, {"product_name": "Coffee Maker", "category": "Home & Kitchen", "revenue": 37049.04, "units_sold": 351}, {"product_name": "Sunscreen", "category": "Beauty", "revenue": 35136.27, "units_sold": 342}, {"product_name": "USB-C Hub", "category": "Electronics", "revenue": 34661.91, "units_sold": 330}, {"product_name": "Jacket", "category": "Apparel", "revenue": 31545.25, "units_sold": 367}, {"product_name": "T-Shirt", "category": "Apparel", "revenue": 28039.05, "units_sold": 367}, {"product_name": "Face Serum", "category": "Beauty", "revenue": 26159.25, "units_sold": 338}, {"product_name": "Resistance Bands", "category": "Sports", "revenue": 22998.95, "units_sold": 323}, {"product_name": "Wireless Earbuds", "category": "Electronics", "revenue": 22360.86, "units_sold": 286}], "by_channel": [{"channel": "Website", "revenue": 267803.84, "orders": 3042, "return_rate_pct": 5.72}, {"channel": "Mobile App", "revenue": 178804.77, "orders": 2071, "return_rate_pct": 5.79}, {"channel": "Marketplace", "revenue": 76247.9, "orders": 887, "return_rate_pct": 5.64}], "by_region": [{"region": "Latin America", "revenue": 109066.81, "profit": 49175.03, "customers": 903}, {"region": "Europe", "revenue": 108471.12, "profit": 48805.36, "customers": 867}, {"region": "Asia Pacific", "revenue": 105345.79, "profit": 47453.9, "customers": 859}, {"region": "Middle East", "revenue": 102438.04, "profit": 46121.83, "customers": 863}, {"region": "North America", "revenue": 97534.75, "profit": 43954.69, "customers": 860}], "return_by_category": [{"category": "Apparel", "return_rate_pct": 6.03}, {"category": "Beauty", "return_rate_pct": 5.99}, {"category": "Home & Kitchen", "return_rate_pct": 5.73}, {"category": "Sports", "return_rate_pct": 5.48}, {"category": "Electronics", "return_rate_pct": 5.42}]};
+
+const fmtUSD = n => "$" + Number(n).toLocaleString(undefined,{maximumFractionDigits:0});
+const gridColor = "#2a3350";
+const textColor = "#8b93a7";
+Chart.defaults.color = textColor;
+Chart.defaults.borderColor = gridColor;
+Chart.defaults.font.family = "-apple-system,Segoe UI,Roboto,sans-serif";
+
+// KPI cards
+const k = DATA.kpis;
+document.getElementById('kpiRow').innerHTML = `
+  <div class="kpi"><div class="label">Total Revenue</div><div class="value">${fmtUSD(k.total_revenue)}</div></div>
+  <div class="kpi"><div class="label">Total Profit</div><div class="value green">${fmtUSD(k.total_profit)}</div></div>
+  <div class="kpi"><div class="label">Total Orders</div><div class="value">${Number(k.total_orders).toLocaleString()}</div></div>
+  <div class="kpi"><div class="label">Unique Customers</div><div class="value">${Number(k.total_customers).toLocaleString()}</div></div>
+  <div class="kpi"><div class="label">Avg Order Value</div><div class="value">${fmtUSD(k.avg_order_value)}</div></div>
+  <div class="kpi"><div class="label">Return Rate</div><div class="value orange">${k.return_rate_pct}%</div></div>
+`;
+
+// Trend chart
+new Chart(document.getElementById('trendChart'), {
+  type: 'line',
+  data: {
+    labels: DATA.monthly.map(d=>d.month),
+    datasets: [
+      {label:'Revenue', data: DATA.monthly.map(d=>d.revenue), borderColor:'#5b8cff', backgroundColor:'rgba(91,140,255,.15)', fill:true, tension:.3},
+      {label:'Profit', data: DATA.monthly.map(d=>d.profit), borderColor:'#33d6b0', backgroundColor:'rgba(51,214,176,.1)', fill:true, tension:.3}
+    ]
+  },
+  options: {responsive:true, plugins:{legend:{labels:{boxWidth:12}}}, scales:{x:{grid:{color:gridColor}},y:{grid:{color:gridColor}}}}
+});
+
+// Category pie
+new Chart(document.getElementById('categoryPie'), {
+  type: 'doughnut',
+  data: {
+    labels: DATA.by_category.map(d=>d.category),
+    datasets: [{data: DATA.by_category.map(d=>d.revenue), backgroundColor:['#5b8cff','#33d6b0','#ff9f5b','#ff6b81','#a78bfa']}]
+  },
+  options: {responsive:true, plugins:{legend:{position:'bottom',labels:{boxWidth:10,font:{size:11}}}}}
+});
+
+// Channel chart
+new Chart(document.getElementById('channelChart'), {
+  type: 'bar',
+  data: {
+    labels: DATA.by_channel.map(d=>d.channel),
+    datasets: [{label:'Revenue', data: DATA.by_channel.map(d=>d.revenue), backgroundColor:'#5b8cff', borderRadius:6}]
+  },
+  options: {responsive:true, plugins:{legend:{display:false}}, scales:{x:{grid:{display:false}},y:{grid:{color:gridColor}}}}
+});
+
+// Region chart
+new Chart(document.getElementById('regionChart'), {
+  type: 'bar',
+  data: {
+    labels: DATA.by_region.map(d=>d.region),
+    datasets: [
+      {label:'Revenue', data: DATA.by_region.map(d=>d.revenue), backgroundColor:'#5b8cff', borderRadius:6},
+      {label:'Profit', data: DATA.by_region.map(d=>d.profit), backgroundColor:'#33d6b0', borderRadius:6}
+    ]
+  },
+  options: {responsive:true, plugins:{legend:{labels:{boxWidth:12}}}, scales:{x:{grid:{display:false}},y:{grid:{color:gridColor}}}}
+});
+
+// Return rate chart
+new Chart(document.getElementById('returnChart'), {
+  type: 'bar',
+  data: {
+    labels: DATA.return_by_category.map(d=>d.category),
+    datasets: [{label:'Return Rate %', data: DATA.return_by_category.map(d=>d.return_rate_pct), backgroundColor:'#ff6b81', borderRadius:6}]
+  },
+  options: {indexAxis:'y', responsive:true, plugins:{legend:{display:false}}, scales:{x:{grid:{color:gridColor}},y:{grid:{display:false}}}}
+});
+
+// Top products table
+document.getElementById('topProductsBody').innerHTML = DATA.top_products.map(p => `
+  <tr>
+    <td>${p.product_name}</td>
+    <td><span class="tag">${p.category}</span></td>
+    <td>${p.units_sold}</td>
+    <td>${fmtUSD(p.revenue)}</td>
+  </tr>
+`).join('');
+</script>
+
+</body>
+</html>
