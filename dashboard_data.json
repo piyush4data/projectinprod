@@ -1,0 +1,324 @@
+{
+  "kpis": {
+    "total_revenue": 522856.51,
+    "total_profit": 235510.81,
+    "total_orders": 6000.0,
+    "total_customers": 1729.0,
+    "return_rate_pct": 5.73,
+    "avg_order_value": 87.14
+  },
+  "monthly": [
+    {
+      "month": "2024-01",
+      "revenue": 19162.25,
+      "profit": 8466.52,
+      "orders": 244
+    },
+    {
+      "month": "2024-02",
+      "revenue": 18537.03,
+      "profit": 8291.72,
+      "orders": 233
+    },
+    {
+      "month": "2024-03",
+      "revenue": 25001.44,
+      "profit": 11314.39,
+      "orders": 260
+    },
+    {
+      "month": "2024-04",
+      "revenue": 23985.42,
+      "profit": 10813.62,
+      "orders": 269
+    },
+    {
+      "month": "2024-05",
+      "revenue": 24533.52,
+      "profit": 11025.05,
+      "orders": 257
+    },
+    {
+      "month": "2024-06",
+      "revenue": 18806.45,
+      "profit": 8437.98,
+      "orders": 214
+    },
+    {
+      "month": "2024-07",
+      "revenue": 20439.02,
+      "profit": 9178.11,
+      "orders": 242
+    },
+    {
+      "month": "2024-08",
+      "revenue": 21538.43,
+      "profit": 9740.83,
+      "orders": 246
+    },
+    {
+      "month": "2024-09",
+      "revenue": 18073.74,
+      "profit": 8180.83,
+      "orders": 208
+    },
+    {
+      "month": "2024-10",
+      "revenue": 22260.51,
+      "profit": 10167.04,
+      "orders": 256
+    },
+    {
+      "month": "2024-11",
+      "revenue": 23498.24,
+      "profit": 10622.61,
+      "orders": 271
+    },
+    {
+      "month": "2024-12",
+      "revenue": 23712.06,
+      "profit": 11021.73,
+      "orders": 258
+    },
+    {
+      "month": "2025-01",
+      "revenue": 22824.72,
+      "profit": 10150.55,
+      "orders": 259
+    },
+    {
+      "month": "2025-02",
+      "revenue": 21689.23,
+      "profit": 9642.11,
+      "orders": 248
+    },
+    {
+      "month": "2025-03",
+      "revenue": 22378.04,
+      "profit": 10062.85,
+      "orders": 258
+    },
+    {
+      "month": "2025-04",
+      "revenue": 19958.45,
+      "profit": 8945.27,
+      "orders": 231
+    },
+    {
+      "month": "2025-05",
+      "revenue": 21823.42,
+      "profit": 9820.15,
+      "orders": 261
+    },
+    {
+      "month": "2025-06",
+      "revenue": 21133.52,
+      "profit": 9538.39,
+      "orders": 227
+    },
+    {
+      "month": "2025-07",
+      "revenue": 22707.36,
+      "profit": 10270.68,
+      "orders": 264
+    },
+    {
+      "month": "2025-08",
+      "revenue": 21913.78,
+      "profit": 9889.96,
+      "orders": 263
+    },
+    {
+      "month": "2025-09",
+      "revenue": 18128.87,
+      "profit": 8179.96,
+      "orders": 226
+    },
+    {
+      "month": "2025-10",
+      "revenue": 22259.58,
+      "profit": 9832.76,
+      "orders": 271
+    },
+    {
+      "month": "2025-11",
+      "revenue": 25721.34,
+      "profit": 11676.8,
+      "orders": 271
+    },
+    {
+      "month": "2025-12",
+      "revenue": 22770.09,
+      "profit": 10240.9,
+      "orders": 263
+    }
+  ],
+  "by_category": [
+    {
+      "category": "Beauty",
+      "revenue": 133976.99,
+      "profit": 61200.37,
+      "units_sold": 1635
+    },
+    {
+      "category": "Electronics",
+      "revenue": 114861.87,
+      "profit": 59071.75,
+      "units_sold": 1652
+    },
+    {
+      "category": "Apparel",
+      "revenue": 109798.69,
+      "profit": 45413.55,
+      "units_sold": 1719
+    },
+    {
+      "category": "Home & Kitchen",
+      "revenue": 91328.39,
+      "profit": 36856.62,
+      "units_sold": 1708
+    },
+    {
+      "category": "Sports",
+      "revenue": 72890.57,
+      "profit": 32968.52,
+      "units_sold": 1675
+    }
+  ],
+  "top_products": [
+    {
+      "product_name": "Moisturizer",
+      "category": "Beauty",
+      "revenue": 50980.33,
+      "units_sold": 299
+    },
+    {
+      "product_name": "Smart Watch",
+      "category": "Electronics",
+      "revenue": 41956.13,
+      "units_sold": 351
+    },
+    {
+      "product_name": "Coffee Maker",
+      "category": "Home & Kitchen",
+      "revenue": 37049.04,
+      "units_sold": 351
+    },
+    {
+      "product_name": "Sunscreen",
+      "category": "Beauty",
+      "revenue": 35136.27,
+      "units_sold": 342
+    },
+    {
+      "product_name": "USB-C Hub",
+      "category": "Electronics",
+      "revenue": 34661.91,
+      "units_sold": 330
+    },
+    {
+      "product_name": "Jacket",
+      "category": "Apparel",
+      "revenue": 31545.25,
+      "units_sold": 367
+    },
+    {
+      "product_name": "T-Shirt",
+      "category": "Apparel",
+      "revenue": 28039.05,
+      "units_sold": 367
+    },
+    {
+      "product_name": "Face Serum",
+      "category": "Beauty",
+      "revenue": 26159.25,
+      "units_sold": 338
+    },
+    {
+      "product_name": "Resistance Bands",
+      "category": "Sports",
+      "revenue": 22998.95,
+      "units_sold": 323
+    },
+    {
+      "product_name": "Wireless Earbuds",
+      "category": "Electronics",
+      "revenue": 22360.86,
+      "units_sold": 286
+    }
+  ],
+  "by_channel": [
+    {
+      "channel": "Website",
+      "revenue": 267803.84,
+      "orders": 3042,
+      "return_rate_pct": 5.72
+    },
+    {
+      "channel": "Mobile App",
+      "revenue": 178804.77,
+      "orders": 2071,
+      "return_rate_pct": 5.79
+    },
+    {
+      "channel": "Marketplace",
+      "revenue": 76247.9,
+      "orders": 887,
+      "return_rate_pct": 5.64
+    }
+  ],
+  "by_region": [
+    {
+      "region": "Latin America",
+      "revenue": 109066.81,
+      "profit": 49175.03,
+      "customers": 903
+    },
+    {
+      "region": "Europe",
+      "revenue": 108471.12,
+      "profit": 48805.36,
+      "customers": 867
+    },
+    {
+      "region": "Asia Pacific",
+      "revenue": 105345.79,
+      "profit": 47453.9,
+      "customers": 859
+    },
+    {
+      "region": "Middle East",
+      "revenue": 102438.04,
+      "profit": 46121.83,
+      "customers": 863
+    },
+    {
+      "region": "North America",
+      "revenue": 97534.75,
+      "profit": 43954.69,
+      "customers": 860
+    }
+  ],
+  "return_by_category": [
+    {
+      "category": "Apparel",
+      "return_rate_pct": 6.03
+    },
+    {
+      "category": "Beauty",
+      "return_rate_pct": 5.99
+    },
+    {
+      "category": "Home & Kitchen",
+      "return_rate_pct": 5.73
+    },
+    {
+      "category": "Sports",
+      "return_rate_pct": 5.48
+    },
+    {
+      "category": "Electronics",
+      "return_rate_pct": 5.42
+    }
+  ]
+}
