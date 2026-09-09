@@ -1,0 +1,26 @@
+product_id,product_name,category,unit_cost,unit_price
+1000,Wireless Earbuds,Electronics,33.09,80.93
+1001,Smart Watch,Electronics,59.9,123.31
+1002,Bluetooth Speaker,Electronics,16.7,26.25
+1003,Laptop Stand,Electronics,9.36,22.02
+1004,USB-C Hub,Electronics,50.08,109.12
+1005,Air Fryer,Home & Kitchen,6.54,16.13
+1006,Coffee Maker,Home & Kitchen,67.43,110.15
+1007,Blender,Home & Kitchen,18.64,29.86
+1008,Cookware Set,Home & Kitchen,27.82,55.01
+1009,Vacuum Cleaner,Home & Kitchen,37.4,64.34
+1010,T-Shirt,Apparel,50.89,79.05
+1011,Jeans,Apparel,26.91,48.52
+1012,Jacket,Apparel,39.21,88.76
+1013,Sneakers,Apparel,19.98,39.27
+1014,Hoodie,Apparel,49.43,71.73
+1015,Face Serum,Beauty,50.57,80.28
+1016,Shampoo,Beauty,9.88,24.14
+1017,Moisturizer,Beauty,77.42,177.23
+1018,Lipstick,Beauty,27.85,41.98
+1019,Sunscreen,Beauty,56.32,106.12
+1020,Yoga Mat,Sports,14.15,27.52
+1021,Dumbbells,Sports,7.58,18.19
+1022,Running Shoes,Sports,24.41,51.96
+1023,Water Bottle,Sports,28.38,55.97
+1024,Resistance Bands,Sports,46.0,73.75
